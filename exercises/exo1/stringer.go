@@ -1,9 +1,42 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
-// Implement types Rectangle, Circle and Shape
+//Shape is
+type Shape interface {
+	Area() float64
+	fmt.Stringer
+}
 
+//Circle is
+type Circle struct {
+	r float64
+}
+
+//Rectangle is
+type Rectangle struct {
+	width  float64
+	length float64
+}
+
+// Area is
+func (r Rectangle) Area() float64 {
+	return r.width * r.length
+}
+
+//Area is
+func (c Circle) Area() float64 {
+	return 3.14 * math.Pow(c.r, 2)
+}
+func (r Rectangle) String() string {
+	return fmt.Sprint("La largeur du rectangle est de %d et sa longueur est de %d", r.width, r.length)
+}
+func (c Circle) String() string {
+	return fmt.Sprint("Le cerlce a un rayon de %d", c.r)
+}
 func main() {
 	r := &Rectangle{2, 3}
 	c := &Circle{5}
@@ -12,8 +45,6 @@ func main() {
 
 	for _, s := range shapes {
 		fmt.Println(s)
-		// Expected output:
-		// Square of width 2 and length 3
-		// Circle of radius 5
+		fmt.Println("Et d'air : ", s.Area())
 	}
 }
